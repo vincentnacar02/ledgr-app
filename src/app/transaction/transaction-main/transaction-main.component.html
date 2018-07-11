@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <div class="row">
+        <div class="col-12">
+          <h4>New Transaction</h4>
+          <span class="badge badge-pill badge-info" style="float: right !important;">Not Posted</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <app-transaction-header></app-transaction-header>
+          <button type="submit" class="btn btn-primary" (click)="addItem()">Add Item</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <br />
+          <div *ngFor="let line of transactionLines">
+              <app-transaction-line [transactionLine]="line" (deleteLine)="deleteLine($event)"></app-transaction-line>
+          </div>
+          <div *ngIf="!transactionLines || transactionLines.length <= 0">
+            <small><i>No available items to show.</i></small>
+          </div>
+          <br />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="btn-group" role="group" aria-label="Options">
+            <button type="submit" class="btn btn-primary" (click)="save()">Save Transaction</button>
+            <button type="submit" class="btn btn-success">Post Transaction</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <h4>Transactions</h4>
+    </div>
+  </div>
+</div>

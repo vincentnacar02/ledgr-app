@@ -1,0 +1,38 @@
+<div style="width: 100%;">
+  <form>
+      <div class="form-row">
+        <div class="col">
+          <select class="form-control">
+            <option>Select Account</option>
+          </select>
+        </div>
+        <div class="col">
+          <select class="form-control">
+            <option>Select User</option>
+          </select>
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Doc Ref#">
+        </div>
+        <div class="col">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">DR</div>
+            </div>
+            <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="0.00">
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">CR</div>
+            </div>
+            <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="0.00">
+          </div>
+        </div>
+      </div>
+  </form>
+  <div class="btn-group" role="group">
+      <button type="button" class="btn btn-link" (click)="delete()">Delete</button>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <form>
+        <div class="form-group">
+          <label for="organizationName">Organization Name</label>
+          <input type="text" class="form-control" id="organizationName" name="organizationName" placeholder="Enter organization name" [(ngModel)]="organization.OrganizationName">
+          <small id="organizationName" class="form-text text-muted">We'll never share it with anyone else.</small>
+        </div>
+        <div class="btn-group" role="group">
+            <button (click)="onSave()" class="btn btn-primary" *ngIf="!organization.OrganizationID">Add</button>
+            <button (click)="onUpdate()" class="btn btn-primary" *ngIf="organization.OrganizationID">Save Changes</button>
+            <button (click)="reset()" class="btn btn-info">Clear</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-12">
+      <table class="table" style="width: 100%;" *ngIf="(organizations$ | async) && (organizations$ | async).length > 0">
+          <thead>
+            <tr>
+              <th scope="col">Options</th>
+              <th scope="col">ID</th>
+              <th scope="col">Organization</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let org of organizations$ | async">
+              <th scope="row">
+                  <div class="btn-group" role="group">
+                      <button type="button" (click)="onSelect(org)" class="btn btn-info">Edit</button>
+                      <button type="button" (click)="onDelete(org)" class="btn btn-outline-danger">Delete</button>
+                  </div>
+              </th>
+              <th scope="row">{{ org.OrganizationID }}</th>
+              <td scope="row">{{ org.OrganizationName }}</td>
+            </tr>
+          </tbody>
+      </table>
+      <div *ngIf="!(organizations$ | async)">
+        <small><i>No data available.</i></small>
+      </div>
+    </div>
+  </div>
+</div>
