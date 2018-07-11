@@ -13,6 +13,7 @@ export class OrganizationComponent implements OnInit {
 
   organization: Organization;
   organizations$: Observable<Organization[]>;
+  organizations: Organization[];
 
   constructor(
     private orgService: OrganizationService
@@ -29,6 +30,7 @@ export class OrganizationComponent implements OnInit {
     this.organizations$ = this.orgService.fetch();
     this.organizations$.subscribe(data => {
       console.log(data);
+      this.organizations = data;
     });
   }
 

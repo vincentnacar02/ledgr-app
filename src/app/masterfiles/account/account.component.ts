@@ -12,6 +12,7 @@ export class AccountComponent implements OnInit {
 
   account: Account;
   accounts$: Observable<Account[]>;
+  accounts: Account[];
 
   constructor(
     private acctService: AccountService
@@ -26,6 +27,7 @@ export class AccountComponent implements OnInit {
     this.accounts$ = this.acctService.fetch();
     this.accounts$.subscribe(data => {
       console.log(data);
+      this.accounts = data;
     });
   }
 

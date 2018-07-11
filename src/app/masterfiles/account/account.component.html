@@ -25,7 +25,7 @@
   <br />
   <div class="row">
     <div class="col-12">
-      <table class="table" style="width: 100%;" *ngIf="(accounts$ | async) && (accounts$ | async).length > 0">
+      <table class="table" style="width: 100%;" *ngIf="accounts && accounts.length > 0">
           <thead>
             <tr>
               <th scope="col">Options</th>
@@ -51,7 +51,7 @@
             </tr>
           </tbody>
       </table>
-      <div *ngIf="!(accounts$ | async)">
+      <div *ngIf="!accounts">
         <small><i>No data available.</i></small>
       </div>
     </div>

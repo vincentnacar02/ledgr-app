@@ -1,3 +1,69 @@
-<p>
-  fiscalyear works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <form>
+        <div class="form-group">
+          <label for="startDate">Start Date</label>
+          <input type="date" class="form-control" id="startDate" name="startDate" placeholder="Enter start date"
+          [ngModel] ="fy.StartDate | date:'yyyy-MM-dd'" (ngModelChange)="fy.StartDate = $event">
+        </div>
+        <div class="form-group">
+          <label for="endDate">End Date</label>
+          <input type="date" class="form-control" id="endDate" name="endDate" placeholder="Enter end date" 
+          [ngModel] ="fy.EndDate | date:'yyyy-MM-dd'" (ngModelChange)="fy.EndDate = $event">
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="isActive" name="isActive" [(ngModel)]="fy.IsActive">
+          <label class="form-check-label" for="isActive">Is Active</label>
+        </div>
+        <div class="form-group">
+          <select class="form-control" (change)="selectOrganization($event)" required>
+            <option value="null">Select Organization</option>
+            <option *ngFor="let org of organizations$ | async" value="{{org.OrganizationID}}" [selected]="org.OrganizationID == fy.OrganizationID">{{ org.OrganizationName }}</option>
+          </select>
+        </div>
+        <div class="btn-group" role="group">
+            <button (click)="onSave()" class="btn btn-primary" *ngIf="!fy.FiscalYearID">Add</button>
+            <button (click)="onUpdate()" class="btn btn-primary" *ngIf="fy.FiscalYearID">Save Changes</button>
+            <button (click)="reset()" class="btn btn-info">Clear</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-12">
+      <table class="table" style="width: 100%;" *ngIf="fys && fys.length > 0">
+          <thead>
+            <tr>
+              <th scope="col">Options</th>
+              <th scope="col">ID</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">End Date</th>
+              <th scope="col">Is Active</th>
+              <th scope="col">Organization</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let fy of fys$ | async">
+              <th scope="row">
+                  <div class="btn-group" role="group">
+                      <button type="button" (click)="onSelect(fy)" class="btn btn-info">Edit</button>
+                      <button type="button" (click)="onDelete(fy)" class="btn btn-outline-danger">Delete</button>
+                  </div>
+              </th>
+              <th scope="row">{{ fy.FiscalYearID }}</th>
+              <td scope="row">{{ fy.StartDate }}</td>
+              <td scope="row">{{ fy.EndDate }}</td>
+              <td scope="row" *ngIf="fy.IsActive">Active</td>
+              <td scope="row" *ngIf="!fy.IsActive">Not Active</td>
+              <td scope="row">{{ getOrganizationName(fy.OrganizationID) }}</td>
+            </tr>
+          </tbody>
+      </table>
+      <div *ngIf="!fys">
+        <small><i>No data available.</i></small>
+      </div>
+    </div>
+  </div>
+</div>
