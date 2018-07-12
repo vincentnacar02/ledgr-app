@@ -58,3 +58,15 @@ export class FiscalYear {
         public OrganizationID?: number
     ){}
 }
+
+export class User {
+    constructor(
+        public UserID?: number,
+        public UserName?: string,
+        public EmailAddress?: string,
+        public Password?: string,
+        public FirstName?: string,
+        public LastName?: string,
+        public Birthdate?: string
+    ){}
+}

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginMasterComponent } from './login/login-master/login-master.component';
 import { SiteMasterComponent } from './site-master.component';
 
 const APP_ROUTES: Routes = [
@@ -21,8 +20,7 @@ const APP_ROUTES: Routes = [
     },
     {
         path: 'auth',
-        loadChildren: './login/login.module#LoginModule',
-        component: LoginMasterComponent
+        loadChildren: './login/login.module#LoginModule'
     }
 ]
 

@@ -18,6 +18,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './login/login.module';
 import { SiteMasterComponent } from './site-master.component';
+import { AuthService } from './shared/auth.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { SiteMasterComponent } from './site-master.component';
     LoginModule,
     AppRoutingModule
   ],
-  providers: [OrganizationService],
+  providers: [OrganizationService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

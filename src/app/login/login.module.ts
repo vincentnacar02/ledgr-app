@@ -7,7 +7,7 @@ import { LoginMasterComponent } from './login-master/login-master.component';
 const CHILD: Routes = [
   {
     path: '',
-    component: LoginComponent
+    component: LoginMasterComponent
   }
 ]
 

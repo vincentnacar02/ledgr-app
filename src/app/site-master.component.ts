@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { auth } from 'firebase';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { OrganizationService } from './shared/organization.service';
 import { Observable } from 'rxjs';
 import { Organization } from './_models/models';
@@ -21,11 +20,6 @@ export class SiteMasterComponent implements OnInit {
     ) { }
 
     ngOnInit(): void { 
-        auth().onAuthStateChanged((user) => {
-            if (!user) {
-                this.router.navigate(['/auth']);
-            }
-        });
         this.organiations$ = this.orgService.fetch();
         this.organiations$.subscribe(data => {
           console.log(data);
@@ -36,4 +30,9 @@ export class SiteMasterComponent implements OnInit {
         this.fbAuth.auth.signOut();
         this.router.navigate(['/auth']);
     }
+
+    about() {
+
+    }
+    
 }
