@@ -9,7 +9,7 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <app-transaction-header></app-transaction-header>
+          <app-transaction-header [transactionHeader]="transactionHeader"></app-transaction-header>
           <button type="submit" class="btn btn-primary" (click)="addItem()">Add Item</button>
         </div>
       </div>
@@ -17,7 +17,7 @@
         <div class="col-12">
           <br />
           <div *ngFor="let line of transactionLines">
-              <app-transaction-line [transactionLine]="line" (deleteLine)="deleteLine($event)"></app-transaction-line>
+              <app-transaction-line [transactionLine]="line" (deleteLine)="deleteLine($event)" (amountChanged)="recomputeTotal()"></app-transaction-line>
           </div>
           <div *ngIf="!transactionLines || transactionLines.length <= 0">
             <small><i>No available items to show.</i></small>

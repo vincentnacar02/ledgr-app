@@ -1,39 +1,39 @@
 <form>
   <div class="form-row">
-    <div class="form-group col-md-4">
-      <label for="example-date-input">Date Posted</label>
-      <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+    <div class="form-group col-md-6">
+      <label for="transRef">Transaction Ref#</label>
+      <input class="form-control" type="text" id="transRef" name="transRef" disabled [(ngModel)]="transactionHeader.TransactionRefID">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="datePosted">Date Posted</label>
+      <input class="form-control" type="date" id="datePosted" name="datePosted" [(ngModel)]="transactionHeader.DatePosted">
     </div>
   </div>
   <div class="form-group">
-    <label for="inputAddress">Memo</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="Enter Memo">
+    <label for="memo">Memo</label>
+    <input type="text" class="form-control" id="memo" placeholder="Enter Memo" name="memo" [(ngModel)]="transactionHeader.Memo">
   </div>
   <div class="form-row">
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-8">
       <label for="inputState">Organization</label>
-      <select id="inputState" class="form-control">
+      <select id="inputState" class="form-control" (change)="selectOrganization($event)">
         <option selected>Choose...</option>
-        <option>...</option>
+        <option *ngFor="let org of organizations$ | async" value="{{ org.OrganizationID }}">{{ org.OrganizationName }}</option>
       </select>
     </div>
-    <div class="form-group col-md-2">
+    <div class="form-group col-md-4">
       <label for="inputState">Fiscal Year</label>
-      <select id="inputState" class="form-control">
+      <select id="inputState" class="form-control" (change)="selectFiscalYear($event)">
         <option selected>Choose...</option>
-        <option>...</option>
+        <option *ngFor="let fy of fiscalYears" value="{{ fy.FiscalYearID }}">{{ fy.StartDate }} - {{ fy.EndDate }}</option>
       </select>
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputCity">City</label>
-      <input type="text" class="form-control" id="inputCity">
     </div>
     <div class="form-group col-md-6">
       <div class="input-group mb-2">
         <div class="input-group-prepend">
           <div class="input-group-text">Total Debit PHP</div>
         </div>
-        <input type="text" disabled class="form-control" id="inlineFormInputGroup" placeholder="0.00">
+        <input type="text" disabled class="form-control" id="totalDebit" name="totalDebit" placeholder="0.00" [(ngModel)]="transactionHeader.TotalDebit">
       </div>
     </div>
     <div class="form-group col-md-6">
@@ -41,7 +41,7 @@
         <div class="input-group-prepend">
           <div class="input-group-text">Total Credit PHP</div>
         </div>
-        <input type="text" disabled class="form-control" id="inlineFormInputGroup" placeholder="0.00">
+        <input type="text" disabled class="form-control" id="totalCredit" name="totalCredit" placeholder="0.00" [(ngModel)]="transactionHeader.TotalCredit">
       </div>
     </div>
   </div>

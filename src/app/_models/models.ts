@@ -14,7 +14,8 @@ export class TransactionHeader {
         public TotalDebit?: number,
         public TotalCredit?: number,
         public OrganizationID?: number,
-        public FiscalYearID?: number
+        public FiscalYearID?: number,
+        public TransactionRefID?: string
     ){}
 }
 

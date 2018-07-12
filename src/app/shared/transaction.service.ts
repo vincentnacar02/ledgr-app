@@ -22,6 +22,8 @@ export class TransactionService {
 
   create() {
     let transactionHeader: TransactionHeader = new TransactionHeader();
+    transactionHeader.TotalDebit = 0;
+    transactionHeader.TotalCredit = 0;
     let transactionLines: TransactionLine[] = new Array<TransactionLine>();
     this.transaction$ = of(new Transaction(transactionHeader, transactionLines));
   }

@@ -30,7 +30,23 @@ export class TransactionMainComponent implements OnInit {
   }
 
   addItem() {
-    this.transactionLines.push(new TransactionLine());
+    const line = new TransactionLine();
+    line.CreditAmount = 0;
+    line.DebitAmount = 0;
+    this.transactionLines.push(line);
+  }
+
+  recomputeTotal() {
+    if (this.transactionLines) {
+      let totalDebit : number = 0;
+      let totalCredit : number = 0;
+      this.transactionLines.forEach(line => {
+        totalDebit += line.DebitAmount;
+        totalCredit += line.CreditAmount;
+      });
+      this.transactionHeader.TotalDebit = totalDebit;
+      this.transactionHeader.TotalCredit = totalCredit;
+    }
   }
 
   save() {
@@ -42,6 +58,7 @@ export class TransactionMainComponent implements OnInit {
     const i = this.transactionLines.indexOf(line);
     console.log(i);
     this.transactionLines.splice(i, 1);
+    this.recomputeTotal();
   }
 
 }

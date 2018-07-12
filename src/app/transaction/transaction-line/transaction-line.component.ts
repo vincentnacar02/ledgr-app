@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { TransactionLine } from '../../_models/models';
+import { TransactionLine, Account } from '../../_models/models';
+import { Observable } from 'rxjs';
+import { AccountService } from '../../shared/account.service';
 
 @Component({
   selector: 'app-transaction-line',
@@ -14,14 +16,29 @@ export class TransactionLineComponent implements OnInit {
   @Output()
   deleteLine: EventEmitter<TransactionLine> = new EventEmitter<TransactionLine>();
 
-  constructor() { }
+  @Output()
+  amountChanged: EventEmitter<TransactionLine> = new EventEmitter<TransactionLine>();
+
+  accounts: Account[];
+  accounts$: Observable<Account[]>;
+
+  constructor(
+    private acctService: AccountService
+  ) { }
 
   ngOnInit() {
-
+    this.accounts$ = this.acctService.fetch();
+    this.accounts$.subscribe(data => {
+      this.accounts = data;
+    })
   }
 
   delete() {
     this.deleteLine.emit(this.transactionLine);
+  }
+
+  recompute() {
+    this.amountChanged.emit(this.transactionLine);
   }
 
 }

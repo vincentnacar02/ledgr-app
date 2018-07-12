@@ -3,7 +3,8 @@
       <div class="form-row">
         <div class="col">
           <select class="form-control">
-            <option>Select Account</option>
+            <option selected>Select Account</option>
+            <option *ngFor="let acct of accounts$ | async" value="{{ acct.AccountID }}">{{ acct.AccountName }}</option>
           </select>
         </div>
         <div class="col">
@@ -19,7 +20,7 @@
             <div class="input-group-prepend">
               <div class="input-group-text">DR</div>
             </div>
-            <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="0.00">
+            <input type="number" class="form-control" id="debitAmount" name="debitAmount" placeholder="0.00" [(ngModel)]="transactionLine.DebitAmount" (ngModelChange)="recompute()">
           </div>
         </div>
         <div class="col">
@@ -27,7 +28,7 @@
             <div class="input-group-prepend">
               <div class="input-group-text">CR</div>
             </div>
-            <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="0.00">
+            <input type="number" class="form-control" id="creditAmount" name="creditAmount" placeholder="0.00" [(ngModel)]="transactionLine.CreditAmount" (ngModelChange)="recompute()">
           </div>
         </div>
       </div>
