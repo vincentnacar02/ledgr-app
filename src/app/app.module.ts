@@ -7,16 +7,23 @@ import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { NgProgressRouterModule } from '@ngx-progressbar/router';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
+
 import { OrganizationService } from './shared/organization.service';
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { LoginModule } from './login/login.module';
+import { SiteMasterComponent } from './site-master.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProfileComponent
+    ProfileComponent,
+    SiteMasterComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +32,9 @@ import { AppRoutingModule } from './app-routing.module';
     NgProgressHttpModule,
     NgProgressRouterModule,
     FormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    LoginModule,
     AppRoutingModule
   ],
   providers: [OrganizationService],
