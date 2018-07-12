@@ -29,14 +29,14 @@ import { AuthService } from './shared/auth.service';
   imports: [
     BrowserModule,
     HttpModule,
-    NgProgressModule.forRoot(),
-    NgProgressHttpModule,
-    NgProgressRouterModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     LoginModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgProgressModule.forRoot(),
+    NgProgressHttpModule,
+    NgProgressRouterModule
   ],
   providers: [OrganizationService, AuthService],
   bootstrap: [AppComponent]

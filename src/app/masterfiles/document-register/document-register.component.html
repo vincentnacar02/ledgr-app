@@ -1,0 +1,63 @@
+<div class="container">
+  <h4>Document Register</h4>
+  <div class="row">
+    <div class="col-12">
+      <form>
+        <div class="form-group">
+          <label for="docRef">Document Ref</label>
+          <input type="text" class="form-control" id="docRef" name="docRef" placeholder="Enter Document Ref" [(ngModel)]="doc.DocumentRef">
+        </div>
+        <div class="form-group">
+          <select class="form-control" (change)="selectUser($event)" required>
+            <option value="null">Select User</option>
+            <option *ngFor="let user of users$ | async" value="{{user.UserID}}" [selected]="user.UserID == doc.UserID">{{ user.FirstName }} {{ user.LastName }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="form-control" (change)="selectAccount($event)" required>
+            <option value="null">Select Account</option>
+            <option *ngFor="let acct of accounts$ | async" value="{{acct.AccountID}}" [selected]="acct.AccountID == doc.AccountID">{{ acct.AccountCode }} - {{ acct.AccountName }}</option>
+          </select>
+        </div>
+        <div class="btn-group" role="group">
+            <button (click)="onSave()" class="btn btn-primary" *ngIf="!doc.DocumentRegisterID">Add</button>
+            <button (click)="onUpdate()" class="btn btn-primary" *ngIf="doc.DocumentRegisterID">Save Changes</button>
+            <button (click)="reset()" class="btn btn-info">Clear</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-12">
+      <table class="table" style="width: 100%;" *ngIf="docs && docs.length > 0">
+          <thead>
+            <tr>
+              <th scope="col">Options</th>
+              <th scope="col">ID</th>
+              <th scope="col">Document Ref</th>
+              <th scope="col">Account</th>
+              <th scope="col">User</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let doc of docs$ | async">
+              <th scope="row">
+                  <div class="btn-group" role="group">
+                      <button type="button" (click)="onSelect(doc)" class="btn btn-info">Edit</button>
+                      <button type="button" (click)="onDelete(doc)" class="btn btn-outline-danger">Delete</button>
+                  </div>
+              </th>
+              <th scope="row">{{ doc.DocumentRegisterID }}</th>
+              <td scope="row">{{ doc.DocumentRef }}</td>
+              <td scope="row">{{ getAccountCodeName(doc.AccountID) }}</td>
+              <td scope="row">{{ getUserFullname(doc.UserID) }}</td>
+            </tr>
+          </tbody>
+      </table>
+      <div *ngIf="!docs">
+        <small><i>No data available.</i></small>
+      </div>
+    </div>
+  </div>
+</div>

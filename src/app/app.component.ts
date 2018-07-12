@@ -44,7 +44,12 @@ export class AppComponent implements OnInit {
   registerNewUser(appUser : User, user: any) {
     appUser.EmailAddress = user.email;
     appUser.UserName = user.email;
-    appUser.FirstName = user.displayName;
+    const fullname = user.displayName.split(" ");
+    if (fullname) {
+      console.log(fullname);
+      appUser.FirstName = fullname[0];
+      appUser.LastName = fullname[1];
+    }
     this.authService.saveOrUpdate(appUser).subscribe(data => {
         console.log(data);
     }, error => console.log(error));

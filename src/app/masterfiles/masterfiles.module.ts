@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { OrganizationComponent } from './organization/organization.component';
 import { AccountComponent } from './account/account.component';
 import { FiscalyearComponent } from './fiscalyear/fiscalyear.component';
+import { DocumentRegisterComponent } from './document-register/document-register.component';
 
 const CHILD: Routes = [
   {
@@ -18,6 +19,10 @@ const CHILD: Routes = [
   {
     path: 'fiscal-year',
     component: FiscalyearComponent
+  },
+  {
+    path: 'doc-register',
+    component: DocumentRegisterComponent
   }
 ]
 
@@ -27,6 +32,6 @@ const CHILD: Routes = [
     FormsModule,
     RouterModule.forChild(CHILD)
   ],
-  declarations: [OrganizationComponent, AccountComponent, FiscalyearComponent]
+  declarations: [OrganizationComponent, AccountComponent, FiscalyearComponent, DocumentRegisterComponent]
 })
 export class MasterfilesModule { }

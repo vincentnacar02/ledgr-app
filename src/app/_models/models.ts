@@ -70,3 +70,12 @@ export class User {
         public Birthdate?: string
     ){}
 }
+
+export class DocumentRegister {
+    constructor(
+        public DocumentRegisterID?: number,
+        public DocumentRef?: string,
+        public UserID?: number,
+        public AccountID?: number
+    ) {}
+}
