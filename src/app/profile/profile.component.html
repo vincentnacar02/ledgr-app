@@ -1,16 +1,11 @@
 <div class="card" style="width: 100%; background: transparent;" *ngIf="fbAuth.user | async as user">
   <img class="card-img-top photoImg" src="{{ user.photoURL }}">
   <div class="card-body">
-    <h5 class="card-title">Welcome! {{ user.email }}</h5>
-    <small>
-      Last login: Don't know yet.
-    </small>
+    Welcome! <b class="card-title">{{ user.email }}</b>
   </div>
   <div class="card-body">
     <a href="#" class="card-link">Edit Profile</a>
     <hr />
     <a href="#" class="card-link">View Ledger</a>
-    <hr />
-    <a href="#" class="card-link">Recent Transactions</a>
   </div>
 </div>

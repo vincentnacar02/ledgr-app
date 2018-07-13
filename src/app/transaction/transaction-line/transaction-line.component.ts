@@ -15,6 +15,9 @@ export class TransactionLineComponent implements OnInit {
   @Input()
   transactionLine: TransactionLine;
 
+  @Input()
+  isPosted: boolean;
+
   @Output()
   deleteLine: EventEmitter<TransactionLine> = new EventEmitter<TransactionLine>();
 

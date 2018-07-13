@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { TransactionHeader, Organization, FiscalYear, Transaction } from '../../_models/models';
 import { OrganizationService } from '../../shared/organization.service';
 import { FiscalyearService } from '../../shared/fiscalyear.service';
@@ -10,7 +10,7 @@ import { TransactionService } from '../../shared/transaction.service';
   templateUrl: './transaction-header.component.html',
   styleUrls: ['./transaction-header.component.css']
 })
-export class TransactionHeaderComponent implements OnInit {
+export class TransactionHeaderComponent implements OnInit, OnChanges {
 
   @Input()
   transactionHeader: TransactionHeader;
@@ -49,13 +49,24 @@ export class TransactionHeaderComponent implements OnInit {
 
   }
 
+  ngOnChanges() {
+    this.refreshFiscalYears();
+  }
+
+  refreshFiscalYears() {
+    const orgId = this.transactionHeader.OrganizationID;
+    if (orgId) {
+      this.fiscalYears$.subscribe(data => {
+        this.fiscalYears = data.filter(fy => fy.OrganizationID == orgId);
+      });
+    }
+  }
+
   selectOrganization(e) {
     console.log(e.target.value);
     const selectedOrgId = e.target.value;
-    this.fiscalYears$.subscribe(data => {
-      this.fiscalYears = data.filter(fy => fy.OrganizationID == selectedOrgId);
-    });
     this.transactionHeader.OrganizationID = selectedOrgId;
+    this.refreshFiscalYears();
   }
 
   selectFiscalYear(e) {

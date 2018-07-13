@@ -2,13 +2,13 @@
   <form>
       <div class="form-row">
         <div class="col">
-          <select class="form-control" (change)="selectAccount($event)">
+          <select class="form-control" (change)="selectAccount($event)" [disabled]="isPosted">
             <option>Select Account</option>
             <option *ngFor="let acct of accounts$ | async" value="{{ acct.AccountID }}" [selected]="acct.AccountID == transactionLine.AccountID">{{ acct.AccountName }}</option>
           </select>
         </div>
         <div class="col">
-          <select class="form-control" (change)="selectUser($event)">
+          <select class="form-control" (change)="selectUser($event)" [disabled]="isPosted">
             <option>Select User</option>
             <option *ngFor="let user of users$ | async" value="{{ user.UserID }}" [selected]="user.UserID == transactionLine.UserID">{{ user.FirstName }} {{ user.LastName }}</option>
           </select>
@@ -21,7 +21,8 @@
             <div class="input-group-prepend">
               <div class="input-group-text">DR</div>
             </div>
-            <input type="number" class="form-control" id="debitAmount" name="debitAmount" placeholder="0.00" [(ngModel)]="transactionLine.DebitAmount" (ngModelChange)="recompute()">
+            <input type="number" class="form-control" id="debitAmount" 
+            name="debitAmount" placeholder="0.00" [(ngModel)]="transactionLine.DebitAmount" (ngModelChange)="recompute()" [disabled]="isPosted">
           </div>
         </div>
         <div class="col">
@@ -29,7 +30,8 @@
             <div class="input-group-prepend">
               <div class="input-group-text">CR</div>
             </div>
-            <input type="number" class="form-control" id="creditAmount" name="creditAmount" placeholder="0.00" [(ngModel)]="transactionLine.CreditAmount" (ngModelChange)="recompute()">
+            <input type="number" class="form-control" id="creditAmount" 
+            name="creditAmount" placeholder="0.00" [(ngModel)]="transactionLine.CreditAmount" (ngModelChange)="recompute()" [disabled]="isPosted">
           </div>
         </div>
       </div>
