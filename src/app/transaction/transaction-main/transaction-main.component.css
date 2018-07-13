@@ -1,0 +1,4 @@
+.transaction-list {
+    max-height: 700px;
+    overflow-y: scroll;
+}

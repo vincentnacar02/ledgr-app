@@ -15,7 +15,8 @@ export class TransactionHeader {
         public TotalCredit?: number,
         public OrganizationID?: number,
         public FiscalYearID?: number,
-        public TransactionRefID?: string
+        public TransactionRefID?: string,
+        public IsPosted?: boolean
     ){}
 }
 
@@ -24,8 +25,6 @@ export class TransactionLine {
         public TransactionLineID?: number,
         public TransactionID?: number,
         public AccountID?: number,
-        public OrganizationID?: number,
-        public FiscalYear?: number,
         public DocumentRef?: string,
         public UserID?: number,
         public DebitAmount?: number,

@@ -1,10 +1,12 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-8">
       <div class="row">
         <div class="col-12">
-          <h4>New Transaction</h4>
-          <span class="badge badge-pill badge-info" style="float: right !important;">Not Posted</span>
+          <h4 *ngIf="!transaction.Header.TransactionID">New Transaction</h4>
+          <h4 *ngIf="transaction.Header.TransactionID">Ref: {{ transaction.Header.TransactionRefID }}</h4>
+          <span *ngIf="!transaction.Header.IsPosted" class="badge badge-pill badge-info" style="float: right !important;">Not Posted</span>
+          <span *ngIf="transaction.Header.IsPosted" class="badge badge-pill badge-success" style="float: right !important;">Posted</span>
         </div>
       </div>
       <div class="row">
@@ -28,14 +30,47 @@
       <div class="row">
         <div class="col-12">
           <div class="btn-group" role="group" aria-label="Options">
-            <button type="submit" class="btn btn-primary" (click)="save()">Save Transaction</button>
-            <button type="submit" class="btn btn-success">Post Transaction</button>
+            <button *ngIf="transaction.Header.IsPosted"  type="submit" class="btn btn-warning" (click)="save(false)">Unpost Transaction</button>
+            <button *ngIf="!transaction.Header.IsPosted"  type="submit" class="btn btn-primary" (click)="save(false)">Save Transaction</button>
+            <button *ngIf="!transaction.Header.IsPosted"  type="submit" class="btn btn-success" (click)="save(true)">Post Transaction</button>
           </div>
         </div>
       </div>
     </div>
     <div class="col-4">
-      <h4>Transactions</h4>
+      <h5>Transactions</h5>
+      <ul class="list-group transaction-list">
+        <li class="list-group-item" *ngFor="let transaction of transactions$ | async">
+          <div class="card" style="width: 100%;">
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">
+                Ref: {{ transaction.Header.TransactionRefID }}
+                <span *ngIf="!transaction.Header.IsPosted" class="badge badge-info" style="float: right;">Not Posted</span>
+                <span *ngIf="transaction.Header.IsPosted" class="badge badge-success" style="float: right;">Posted</span>
+              </h6>
+
+              <div class="card-text">
+                {{ transaction.Header.Memo }} <br />
+                <small><i>Date Created: {{ transaction.Header.DateCreated }}</i></small>
+              </div>
+
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-success">Total Debit: {{ transaction.Header.TotalDebit | currency:'PHP' }}</li>
+                <li class="list-group-item list-group-item-success">Total Credit: {{ transaction.Header.TotalCredit | currency:'PHP' }}</li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Total Items: 
+                    <span class="badge badge-primary badge-pill">{{ transaction.Lines.length }}</span>
+                </li>
+              </ul>
+             
+              <hr />
+              <div class="btn-group" role="group">
+                <button class="btn btn-outline-primary disabled" (click)="select(transaction)">Edit</button>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

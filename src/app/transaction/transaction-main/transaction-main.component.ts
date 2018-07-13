@@ -15,17 +15,40 @@ export class TransactionMainComponent implements OnInit {
   transactionLines: TransactionLine[];
   transaction$: Observable<Transaction>;
 
+  transactions$: Observable<Transaction[]>;
+
   constructor(
     private transactionService: TransactionService
   ) { }
 
   ngOnInit() {
+    this.createNew();
+    this.refreshList();
+  }
+
+  createNew() {
     this.transactionService.create();
+    this.refreshSelected();
+  }
+
+  select(tran: Transaction) {
+    this.transactionService.select(tran);
+    this.refreshSelected();
+  }
+
+  refreshSelected() {
     this.transaction$ = this.transactionService.current();
     this.transaction$.subscribe(data => {
       this.transaction = data;
       this.transactionHeader = this.transaction.Header;
       this.transactionLines = this.transaction.Lines;
+    });
+  }
+
+  refreshList() {
+    this.transactions$ = this.transactionService.fetchAll();
+    this.transactions$.subscribe(data => {
+      console.log(data);
     });
   }
 
@@ -49,8 +72,17 @@ export class TransactionMainComponent implements OnInit {
     }
   }
 
-  save() {
+  save(post: boolean) {
+    this.transaction.Header.IsPosted = post;
     console.log(this.transaction);
+    this.transactionService.save(this.transaction).subscribe(data => {
+      if (data) {
+        this.createNew();
+        this.refreshList();
+      }
+    }, error => {
+      console.log(error);
+    })
   }
 
   deleteLine(line: TransactionLine) {

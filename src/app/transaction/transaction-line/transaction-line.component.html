@@ -2,18 +2,19 @@
   <form>
       <div class="form-row">
         <div class="col">
-          <select class="form-control">
-            <option selected>Select Account</option>
-            <option *ngFor="let acct of accounts$ | async" value="{{ acct.AccountID }}">{{ acct.AccountName }}</option>
+          <select class="form-control" (change)="selectAccount($event)">
+            <option>Select Account</option>
+            <option *ngFor="let acct of accounts$ | async" value="{{ acct.AccountID }}" [selected]="acct.AccountID == transactionLine.AccountID">{{ acct.AccountName }}</option>
           </select>
         </div>
         <div class="col">
-          <select class="form-control">
+          <select class="form-control" (change)="selectUser($event)">
             <option>Select User</option>
+            <option *ngFor="let user of users$ | async" value="{{ user.UserID }}" [selected]="user.UserID == transactionLine.UserID">{{ user.FirstName }} {{ user.LastName }}</option>
           </select>
         </div>
         <div class="col">
-          <input type="text" class="form-control" placeholder="Doc Ref#">
+          <input id="docRef" name="docRef" type="text" class="form-control" placeholder="Doc Ref#" disabled [(ngModel)]="transactionLine.DocumentRef">
         </div>
         <div class="col">
           <div class="input-group">

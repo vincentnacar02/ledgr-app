@@ -10,6 +10,8 @@ import { TransactionService } from '../shared/transaction.service';
 import { AccountService } from '../shared/account.service';
 import { OrganizationService } from '../shared/organization.service';
 import { FiscalyearService } from '../shared/fiscalyear.service';
+import { UserService } from '../shared/user.service';
+import { DocumentService } from '../shared/document.service';
 
 const CHILD : Routes = [
   {
@@ -26,6 +28,13 @@ const CHILD : Routes = [
   ],
   declarations: [TransactionMainComponent, TransactionHeaderComponent, TransactionLineComponent],
   exports: [RouterModule],
-  providers: [TransactionService, AccountService, OrganizationService, FiscalyearService]
+  providers: [
+    TransactionService, 
+    AccountService, 
+    OrganizationService, 
+    FiscalyearService, 
+    UserService,
+    DocumentService
+  ]
 })
 export class TransactionModule { }
