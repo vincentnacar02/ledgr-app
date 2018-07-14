@@ -13,7 +13,7 @@
       <div class="row">
         <div class="col-12">
           <app-transaction-header [transactionHeader]="transactionHeader"></app-transaction-header>
-          <button type="submit" class="btn btn-primary" (click)="addItem()">Add Item</button>
+          <button type="submit" class="btn btn-primary" (click)="addItem()" [disabled]="transaction.Header.IsPosted">Add Item</button>
         </div>
       </div>
       <div class="row">

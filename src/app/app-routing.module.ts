@@ -1,26 +1,59 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SiteMasterComponent } from './site-master.component';
+import { AuthGuard } from './_guard/auth.guard';
 
 const APP_ROUTES: Routes = [
     {
-        path: 'dashboard',
-        loadChildren: './dashboard/dashboard.module#DashboardModule',
-        component: SiteMasterComponent
+        path: '',
+        redirectTo: 'app',
+        pathMatch: 'full'
     },
     {
-        path: 'masterfile',
-        loadChildren: './masterfiles/masterfiles.module#MasterfilesModule',
-        component: SiteMasterComponent
+        path: 'app',
+        redirectTo: 'app/dashboard'
     },
     {
-        path: 'transaction',
-        loadChildren: './transaction/transaction.module#TransactionModule',
-        component: SiteMasterComponent
+        path: 'app',
+        component: SiteMasterComponent,
+        children: [
+            {
+                path: 'dashboard',
+                loadChildren: './dashboard/dashboard.module#DashboardModule'
+            }
+        ],
+        canActivate: [AuthGuard]
     },
     {
-        path: 'auth',
-        loadChildren: './login/login.module#LoginModule'
+        path: 'app',
+        component: SiteMasterComponent,
+        children: [
+            {
+                path: 'masterfile',
+                loadChildren: './masterfiles/masterfiles.module#MasterfilesModule'
+            }
+        ],
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'app',
+        component: SiteMasterComponent,
+        children: [
+            {
+                path: 'transaction',
+                loadChildren: './transaction/transaction.module#TransactionModule'
+            }
+        ],
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'login',
+        children: [
+            {
+                path: 'auth',
+                loadChildren: './login/login.module#LoginModule'
+            }
+        ]
     }
 ]
 

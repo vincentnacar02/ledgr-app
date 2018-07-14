@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { auth } from 'firebase';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     auth().onAuthStateChanged((user) => {
       if (user) {
-        this.router.navigate(['/dashboard'])
+        // this.router.navigate(['app']);
+        window.location.href = '/#/app';
       }
     });
   }

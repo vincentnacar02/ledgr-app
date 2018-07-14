@@ -28,7 +28,7 @@ export class SiteMasterComponent implements OnInit {
 
     logout() {
         this.fbAuth.auth.signOut();
-        this.router.navigate(['/auth']);
+        this.router.navigate(['/login/auth']);
     }
 
     about() {

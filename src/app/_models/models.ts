@@ -66,7 +66,8 @@ export class User {
         public Password?: string,
         public FirstName?: string,
         public LastName?: string,
-        public Birthdate?: string
+        public Birthdate?: string,
+        public PhotoURL?: string
     ){}
 }
 
